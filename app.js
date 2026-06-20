@@ -3,7 +3,7 @@
 const SUPABASE_URL = "https://vidrtshlxcjbmkrrmerg.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_y_cl3Oy3f6x_wEqAgQbkig_dcKiGM6u";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const STORAGE_KEY = 'asistencias_colegial_data';
 const defaultData = {
     usuarios: [
@@ -53,7 +53,7 @@ async function loadData() {
         }
 
         // 2. ¡Aquí viene la magia! Traemos los alumnos reales desde Supabase
-        const { data: alumnosNube, error } = await supabase
+        const { data: alumnosNube, error } = await supabaseClient
             .from('alumnos')
             .select('*');
 
@@ -106,7 +106,7 @@ async function saveData(message = 'Datos guardados automáticamente.') {
             // Limpiamos la tabla en la nube e insertamos el estado fresco
             // Para hacerlo directo, aprovecharemos el RLS que configuraste.
             // Si prefieres guardar uno por uno directo desde el formulario de enviar, me avisas.
-            const { error: deleteError } = await supabase.from('alumnos').delete().neq('id', 0);
+            const { error: deleteError } = await supabaseClient.from('alumnos').delete().neq('id', 0);
             if (!deleteError) {
                 await supabase.from('alumnos').insert(alumnosParaSubir);
             }

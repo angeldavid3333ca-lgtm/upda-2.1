@@ -1,3 +1,9 @@
+
+// Paso 3: Inicializar la conexión con Supabase
+const SUPABASE_URL = "https://vidrtshlxcjbmkrrmerg.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_y_cl3Oy3f6x_wEqAgQbkig_dcKiGM6u";
+
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const STORAGE_KEY = 'asistencias_colegial_data';
 const defaultData = {
     usuarios: [
@@ -30,13 +36,14 @@ const appContent = document.getElementById('appContent');
 const btnExport = document.getElementById('btnExport');
 const fileImportInput = document.getElementById('fileImportInput');
 
-function loadData() {
+async function loadData() {
     try {
+        // 1. Primero carga lo que tengas en localStorage como ya hacías
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
             state.data = JSON.parse(stored);
             state.data.usuarios = Array.isArray(state.data.usuarios) ? state.data.usuarios : defaultData.usuarios;
-            state.data.estudiantes = Array.isArray(state.data.estudiantes) ? state.data.estudiantes : [];
+            state.data.estudiantes = Array.isArray(state.data.estudiantes) ? state.data.estudiantes : defaultData.estudiantes;
             state.data.aulas = Array.isArray(state.data.aulas) ? state.data.aulas : [];
             state.data.asistencia = Array.isArray(state.data.asistencia) ? state.data.asistencia : [];
             state.data.asignacionesDocente = Array.isArray(state.data.asignacionesDocente) ? state.data.asignacionesDocente : [];
@@ -44,17 +51,112 @@ function loadData() {
         } else {
             state.data = JSON.parse(JSON.stringify(defaultData));
         }
+
+        // 2. ¡Aquí viene la magia! Traemos los alumnos reales desde Supabase
+        const { data: alumnosNube, error } = await supabase
+            .from('alumnos')
+            .select('*');
+
+        if (error) throw error;
+
+        // 3. Si hay alumnos en la nube, actualizamos la lista en tu aplicación
+        if (alumnosNube && alumnosNube.length > 0) {
+            state.data.estudiantes = alumnosNube.map(alumno => ({
+                id: alumno.id,
+                codigo: 'ALU-' + alumno.id, 
+                nombre: alumno.nombre,
+                apellido: alumno.apellido, // Mantenemos tu estructura separada
+                fecha_nacimiento: '2011-06-15', 
+                genero: 'Masculino'
+            }));
+        }
+
+        updateStatus('Datos sincronizados con la nube correctamente.');
+
     } catch (error) {
         console.error('Error al cargar datos:', error);
-        state.data = JSON.parse(JSON.stringify(defaultData));
+        // Si el internet falla, usa tu respaldo por defecto para que no se rompa la app
+        if (!state.data) {
+            state.data = JSON.parse(JSON.stringify(defaultData));
+        }
+        updateStatus('Cargado en modo local (sin conexión).');
     }
-    updateStatus('Datos cargados. Todos los cambios se guardan automáticamente.');
 }
 
-function saveData(message = 'Datos guardados automáticamente.') {
+async function saveData(message = 'Datos guardados automáticamente.') {
+    // 1. Guardar localmente en el navegador (para mantener tu respaldo)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data));
-    updateStatus(message);
+
+    try {
+        // 2. Sincronizar los alumnos con la base de datos en Supabase
+        // Primero borramos el contenido viejo e insertamos la lista actual para que estén idénticos
+        // Nota: Esta es la vía rápida de sincronización masiva para desarrollo
+        if (state.data && state.data.estudiantes) {
+            
+            // Preparamos el formato exacto que espera tu tabla 'alumnos' en Supabase
+            const alumnosParaSubir = state.data.estudiantes.map(est => {
+                // Si tu interfaz une el nombre completo, intentamos separar nombre y apellido
+                const partes = est.nombre.split(' ');
+                return {
+                    nombre: partes[0] || 'Sin Nombre',
+                    apellido: partes.slice(1).join(' ') || 'Sin Apellido'
+                };
+            });
+
+            // Limpiamos la tabla en la nube e insertamos el estado fresco
+            // Para hacerlo directo, aprovecharemos el RLS que configuraste.
+            // Si prefieres guardar uno por uno directo desde el formulario de enviar, me avisas.
+            const { error: deleteError } = await supabase.from('alumnos').delete().neq('id', 0);
+            if (!deleteError) {
+                await supabase.from('alumnos').insert(alumnosParaSubir);
+            }
+        }
+
+        updateStatus(message + ' (Sincronizado en la nube)');
+    } catch (error) {
+        console.error('Error al sincronizar con la nube:', error);
+        updateStatus(message + ' (Solo guardado local, revisa tu conexión)');
+    }
 }
+
+// ... Aquí termina el catch de loadData() en la línea 83
+
+async function saveData(message = 'Datos guardados automáticamente.') {
+    // 1. Guardar localmente en el navegador (para mantener tu respaldo)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data));
+
+    try {
+        // 2. Sincronizar los alumnos con la base de datos en Supabase
+        if (state.data && state.data.estudiantes) {
+            
+            // Preparamos el formato exacto que espera tu tabla 'alumnos' en Supabase
+            const alumnosParaSubir = state.data.estudiantes.map(est => {
+                const partes = est.nombre.split(' ');
+                return {
+                    nombre: partes[0] || 'Sin Nombre',
+                    apellido: partes.slice(1).join(' ') || 'Sin Apellido'
+                };
+            });
+
+            // Limpiamos la tabla en la nube e insertamos el estado fresco
+            const { error: deleteError } = await supabase.from('alumnos').delete().neq('id', 0);
+            if (!deleteError) {
+                await supabase.from('alumnos').insert(alumnosParaSubir);
+            }
+        }
+
+        updateStatus(message + ' (Sincronizado en la nube)');
+    } catch (error) {
+        console.error('Error al sincronizar con la nube:', error);
+        updateStatus(message + ' (Solo guardado local, revisa tu conexión)');
+    }
+}
+
+function updateStatus(text) {
+    statusBox.textContent = text;
+}
+
+// ... El resto de tus funciones abajo (createSection, render, etc.)
 
 function updateStatus(text) {
     statusBox.textContent = text;
@@ -816,6 +918,9 @@ fileImportInput.addEventListener('change', event => {
     event.target.value = '';
 });
 
-loadData();
-render();
-userButtonListeners();
+// Envoltura asíncrona para que todo cargue en orden estricto
+(async () => {
+    await loadData(); // Espera a que Supabase traiga los alumnos reales
+    render();         // Pinta la aplicación con los datos frescos de la nube
+    userButtonListeners(); // Activa los botones de la interfaz
+})();

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" 
+    <title>Asistencias colegial</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <style>
+        body { min-height: auto; padding: 30px; background: linear-gradient(180deg, rgba(10,24,40,0.96), rgba(19,69,135,0.92)), url('fondo.png'); background-size: cover; display: block; }
+        .portal-container { max-width: 1200px; margin: 0 auto; background: rgba(0,0,0,0.72); padding: 30px; border-radius: 18px; box-shadow: 0 16px 45px rgba(0,0,0,0.4); }
+        .section { margin-top: 25px; }
+        .section h2, .section h3, .section h4 { margin-bottom: 16px; }
+        .role-buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 24px; }
+        .small-button { display: inline-flex; align-items: center; justify-content: center; padding: 10px 16px; border-radius: 999px; text-decoration: none; color: white; background: #2f80ed; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: transform .2s ease, background .2s ease; }
+        .small-button:hover { transform: translateY(-1px); background: #1f6ed8; }
+        .hidden { display: none !important; }
+        .status-box { display: inline-block; margin-bottom: 16px; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,0.1); color: #f1f1f1; border: 1px solid rgba(255,255,255,0.15); }
+        .card { background: rgba(255,255,255,0.08); padding: 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.14); }
+        input, select { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: white; margin-top: 8px; }
+        textarea { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: white; resize: vertical; }
+        label { display: block; margin-top: 14px; font-weight: 600; }
+        table { width: 100%; border-collapse: collapse; margin-top: 18px; }
+        table th, table td { padding: 12px 10px; color: #f7f7f7; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.12); }
+        table th { font-weight: 700; background: rgba(255,255,255,0.08); }
+        .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; font-size: 0.9em; background: rgba(255,255,255,0.08); }
+        .badge.success { background: #27ae60; }
+        .badge.warn { background: #d35400; }
+        .top-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .top-bar h1 { margin: 0; font-size: 1.8rem; }
+        .notice { margin-top: 12px; line-height: 1.6; color: #d8e8ff; }
+        .export-buttons { justify-content: flex-end; }
+        .alert { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); color: #f3d2d0; padding: 12px 14px; border-radius: 12px; }
+        .top-panel { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+        .top-panel h2 { margin: 0; }
+        @media (max-width: 860px) { .top-bar, .top-panel { flex-direction: column; align-items: stretch; } }
+    </style>
+</head>
+<body>
+<div class="portal-container">
+    <div class="top-bar">
+        <div>
+            <h1>Asistencias colegial</h1>
+            <p class="notice">Guarda todo localmente en el navegador. .</p>
+        </div>
+        <div class="export-buttons">
+            <button class="small-button" id="btnExport">Exportar datos</button>
+            <label class="small-button" for="fileImportInput">Importar datos</label>
+            <input id="fileImportInput" type="file" accept="application/json" class="hidden" />
+        </div>
+    </div>
+    <div class="status-box" id="statusBox">Cargando datos...</div>
+    <div id="appContent" class="section"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

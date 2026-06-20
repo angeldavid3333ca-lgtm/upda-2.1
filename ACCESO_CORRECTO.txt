@@ -1,0 +1,110 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    ⚠️ IMPORTANTE - CÓMO ACCEDER CORRECTAMENTE               ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+🔴 NO HAGAS ESTO (Descarga archivos en lugar de ejecutarlos):
+═════════════════════════════════════════════════════════════════════════════
+
+❌ file:///home/anglortiz/Descargas/proyasist--main/index.html
+❌ Abrir directamente desde el Explorador de Archivos
+❌ Hacer clic en archivos .php locales
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ HAZ ESTO (Ejecuta los archivos a través del servidor HTTP):
+═════════════════════════════════════════════════════════════════════════════
+
+PASO 1: Asegúrate que el servidor está corriendo
+   Terminal: php -S localhost:8000
+   Deberías ver: PHP Development Server started at http://localhost:8000
+
+PASO 2: Usa SOLO estas URLs en el navegador:
+
+   Portal Principal:
+   → http://localhost:8000/index.html
+
+   Inicializar Base de Datos:
+   → http://localhost:8000/setup_db.html
+   → Luego haz clic en "Inicializar Base de Datos"
+
+   Logins:
+   → http://localhost:8000/loginalumno.php
+   → http://localhost:8000/loginprb.php
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎯 PASOS PARA EJECUTAR CORRECTAMENTE:
+═════════════════════════════════════════════════════════════════════════════
+
+1. Abre una Terminal/Consola
+   
+2. Navega a la carpeta del proyecto:
+   cd /home/anglortiz/Descargas/proyasist--main
+
+3. Inicia el servidor PHP:
+   php -S localhost:8000
+   
+   Deberías ver:
+   [DateTime] PHP 8.5.6 Development Server (http://localhost:8000) started
+
+4. Abre tu navegador
+
+5. En la barra de direcciones, escribe:
+   http://localhost:8000/index.html
+
+6. ¡Ya está! Ahora verás el portal principal y podrás acceder normalmente
+
+═════════════════════════════════════════════════════════════════════════════
+
+⚡ COMPARACIÓN:
+═════════════════════════════════════════════════════════════════════════════
+
+INCORRECTO (file://)
+└─ Los archivos .php se descargan
+└─ No se ejecutan
+└─ Ver código fuente en lugar de resultados
+
+CORRECTO (http://)
+└─ Los archivos .php se ejecutan
+└─ Se procesan consultas a la BD
+└─ Ver resultados HTML renderizado
+
+═════════════════════════════════════════════════════════════════════════════
+
+💡 PISTA:
+═════════════════════════════════════════════════════════════════════════════
+
+Si ves en la barra de direcciones:
+  file:///...  ❌ MALO - Estás abriendo como archivo
+  http://...   ✅ BUENO - Estás usando el servidor
+
+═════════════════════════════════════════════════════════════════════════════
+
+📞 SOLUCIÓN RÁPIDA SI ALGO FALLA:
+═════════════════════════════════════════════════════════════════════════════
+
+1. Verifica que el servidor está corriendo:
+   - En la Terminal debes ver: "PHP Development Server started"
+   - Si no, ejecuta: php -S localhost:8000
+
+2. Verifica la URL en el navegador:
+   - Debe empezar con: http://localhost:8000/
+   - NO file:///
+
+3. Si siguen siendo descargas:
+   - Cierra el navegador completamente
+   - Limpia el caché (Ctrl+Shift+Supr)
+   - Abre una nueva pestaña
+   - Accede a: http://localhost:8000/index.html
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ CUANDO TODO ESTÁ CORRECTO:
+═════════════════════════════════════════════════════════════════════════════
+
+✓ Ves el "Portal de Acceso" con botones de colores
+✓ Puedes hacer clic en los botones (Alumno, Padre, Docente, Admin)
+✓ Te lleva a las páginas de login
+✓ NO hay descargas de archivos
+
+═════════════════════════════════════════════════════════════════════════════

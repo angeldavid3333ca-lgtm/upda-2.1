@@ -1,0 +1,238 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    📱 ACCEDER DESDE TELÉFONO O INTERNET                    ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+═════════════════════════════════════════════════════════════════════════════
+OPCIÓN 1: ACCESO LOCAL EN LA RED (RECOMENDADO PRIMERO)
+═════════════════════════════════════════════════════════════════════════════
+
+✅ Ventajas:
+  • Acceso INSTANTÁNEO
+  • Sin costo
+  • Sin necesidad de Internet
+  • Funciona en tu WiFi local
+  • Base de datos segura en tu PC
+
+⏱️ Tiempo de configuración: 2 minutos
+
+📋 PASOS:
+
+PASO 1: Obtén la IP de tu computadora
+────────────────────────────────────
+
+En Linux/Fedora (tu caso):
+  Terminal → Escribe: ifconfig
+  O: hostname -I
+  
+Busca la IP que empiece con 192.168 o 10.0
+Ejemplo: 192.168.1.100
+
+En Windows:
+  CMD → Escribe: ipconfig
+  Busca: IPv4 Address
+
+En Mac:
+  Terminal → Escribe: ifconfig | grep inet
+
+PASO 2: Inicia el servidor escuchando en todas las interfaces
+────────────────────────────────────────────────────────────
+
+En tu terminal, ejecuta:
+  php -S 0.0.0.0:8000
+
+Deberías ver:
+  PHP 8.5.6 Development Server (http://0.0.0.0:8000) started
+
+PASO 3: En tu teléfono (conectado a la misma WiFi)
+──────────────────────────────────────────────────
+
+Abre el navegador y escribe:
+  http://192.168.1.100:8000/index.html
+
+REEMPLAZA 192.168.1.100 con la IP de tu PC del PASO 1
+
+PASO 4: ¡Listo!
+──────────────
+
+Ahora desde tu teléfono podrás:
+  • Acceder al portal
+  • Hacer login
+  • Ver registros
+  • Todo sin necesidad de Internet
+
+═════════════════════════════════════════════════════════════════════════════
+OPCIÓN 2: SUBIR A INTERNET (HOSTING GRATUITO)
+═════════════════════════════════════════════════════════════════════════════
+
+✅ Ventajas:
+  • Acceso desde CUALQUIER LUGAR
+  • Desde teléfono sin WiFi
+  • Desde otro país
+  • URL profesional
+
+❌ Desventajas:
+  • Requiere registro
+  • Puede ser más lento
+  • Base de datos en servidor externo
+
+📋 RECOMENDACIÓN: InfinityFree (Gratuito)
+
+PASO 1: Registrarse
+───────────────────
+
+1. Abre: https://www.infinityfree.net
+2. Haz clic en "Sign Up"
+3. Completa el formulario
+4. Confirma email
+
+PASO 2: Crear sitio web
+──────────────────────
+
+1. En tu panel de InfinityFree
+2. Haz clic en "Create New Domain"
+3. Elige un nombre de dominio:
+   Ejemplo: miproyecto.infinityfree.net
+4. Haz clic en "Create"
+
+PASO 3: Acceder a cPanel
+────────────────────────
+
+1. En el panel, busca "cPanel"
+2. Haz clic para entrar al cPanel
+
+PASO 4: Subir archivos (Opción A - Gestor de archivos)
+───────────────────────────────────────────────────────
+
+1. En cPanel → "File Manager"
+2. Abre carpeta "public_html"
+3. Carga todos los archivos:
+   - *.php
+   - *.html
+   - *.css
+   - *.js
+   - asistencia.db
+   - Carpetas (img, etc)
+
+PASO 5: Subir archivos (Opción B - FTP - MÁS RÁPIDO)
+────────────────────────────────────────────────────
+
+1. Descarga FileZilla: https://filezilla-project.org
+2. En cPanel, busca "FTP Accounts"
+3. Copia las credenciales FTP
+4. En FileZilla:
+   - Host: Tu host FTP
+   - Usuario: Tu usuario FTP
+   - Contraseña: Tu contraseña FTP
+   - Puerto: 21
+5. Conecta y carga los archivos
+
+PASO 6: Configurar permisos
+────────────────────────────
+
+En cPanel → File Manager:
+1. Haz clic derecho en "asistencia.db"
+2. Selecciona "Change Permissions"
+3. Cambia a: 666
+4. OK
+
+PASO 7: Acceder desde Internet
+──────────────────────────────
+
+URL: https://miproyecto.infinityfree.net/index.html
+
+O desde teléfono:
+  Navegador → Escribe la URL anterior
+
+═════════════════════════════════════════════════════════════════════════════
+OPCIÓN 3: USAR HEROKU + GITHUB (Más avanzado)
+═════════════════════════════════════════════════════════════════════════════
+
+✅ Ventajas:
+  • Automatizado
+  • Profesional
+  • Escalable
+
+📋 PASOS RESUMIDOS:
+
+1. Sube código a GitHub
+2. Conecta Heroku con GitHub
+3. Heroku despliega automáticamente
+4. Accede desde: https://tunombre-app.herokuapp.com
+
+(Más detalles disponibles en documentación oficial)
+
+═════════════════════════════════════════════════════════════════════════════
+OPCIÓN 4: USAR UN SERVIDOR VPS (Lo más profesional)
+═════════════════════════════════════════════════════════════════════════════
+
+✅ Ventajas:
+  • Completo control
+  • Mejor rendimiento
+  • Dominio personalizado
+
+💰 Costo: $5-10 USD/mes
+
+Opciones:
+  • DigitalOcean
+  • Linode
+  • Vultr
+  • AWS Lightsail
+
+═════════════════════════════════════════════════════════════════════════════
+COMPARATIVA RÁPIDA
+═════════════════════════════════════════════════════════════════════════════
+
+┌──────────────────┬────────┬─────────┬────────┬──────────┐
+│ Opción           │ Costo  │ Rápido  │ Fácil  │ Acceso   │
+├──────────────────┼────────┼─────────┼────────┼──────────┤
+│ LAN Local        │ Gratis │ ✅✅✅  │ ✅✅  │ Solo red │
+│ InfinityFree     │ Gratis │ ✅     │ ✅✅  │ Internet │
+│ Hosting pagado   │ $2-10  │ ✅✅   │ ✅    │ Internet │
+│ Heroku           │ Gratis │ ✅✅   │ ✅    │ Internet │
+│ VPS              │ $5-10  │ ✅✅✅  │ ❌    │ Internet │
+└──────────────────┴────────┴─────────┴────────┴──────────┘
+
+MI RECOMENDACIÓN:
+  1. Primero: OPCIÓN 1 (LAN) para probar en teléfono rápidamente
+  2. Luego: OPCIÓN 2 (InfinityFree) si quieres compartir con otros
+  3. Finalmente: OPCIÓN 4 (VPS) si lo quieres en producción
+
+═════════════════════════════════════════════════════════════════════════════
+PROBLEMAS COMUNES Y SOLUCIONES
+═════════════════════════════════════════════════════════════════════════════
+
+❌ "No puedo acceder desde teléfono a http://192.168.x.x:8000"
+✅ Solución:
+   - Verifica que teléfono está en la MISMA WiFi que la PC
+   - Verifica la IP con: ifconfig o ipconfig
+   - Prueba: ping 192.168.x.x desde terminal del teléfono
+   - Si no funciona, reinicia el router
+
+❌ "Error 500 o 403 en hosting"
+✅ Solución:
+   - Verifica permisos de archivo: 644 (archivos), 755 (carpetas)
+   - asistencia.db debe ser: 666
+   - Verifica que PHP está habilitado
+
+❌ "Base de datos no funciona en hosting"
+✅ Solución:
+   - SQLite debe estar soportado (casi todos lo hacen)
+   - Verifica que asistencia.db está en la carpeta correcta
+   - Verifica permisos de lectura/escritura
+
+═════════════════════════════════════════════════════════════════════════════
+RECOMENDACIÓN FINAL
+═════════════════════════════════════════════════════════════════════════════
+
+Para empezar: USA OPCIÓN 1 (LAN)
+  ✅ Rápido
+  ✅ Seguro
+  ✅ Sin costo
+  ✅ Funciona en 2 minutos
+
+Cuando esté listo para producción: USA OPCIÓN 2 O 4
+  ✅ Accesible desde cualquier lugar
+  ✅ URL profesional
+  ✅ Disponible 24/7
+
+═════════════════════════════════════════════════════════════════════════════

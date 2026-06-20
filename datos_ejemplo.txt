@@ -1,0 +1,64 @@
+====================================
+BASE DE DATOS INICIALIZADA CON SQLITE
+====================================
+
+DATOS DE ACCESO DE EJEMPLO:
+
+👤 ADMINISTRADOR:
+   Email: admin@school.com
+   Contraseña: admin123
+   Rol: admin
+
+👨‍🏫 DOCENTES:
+   Juan Docente
+   Email: juan@school.com
+   Contraseña: docente123
+   
+   María Docente
+   Email: maria@school.com
+   Contraseña: docente123
+
+👨‍👧 PADRES:
+   Carlos Padre
+   Email: carlos@parent.com
+   Contraseña: padre123
+   
+   Ana Madre
+   Email: ana@parent.com
+   Contraseña: padre123
+
+📚 GRUPOS:
+   - 6A (Grado 6)
+   - 6B (Grado 6)
+   - 7A (Grado 7)
+   - 7B (Grado 7)
+   - 8A (Grado 8)
+
+📖 ASIGNATURAS:
+   - Matemáticas (MAT)
+   - Lenguaje (LEN)
+   - Ciencias Naturales (CNA)
+   - Historia (HIS)
+   - Educación Física (EF)
+   - Inglés (ING)
+
+👥 ESTUDIANTES (CÓDIGOS):
+   - EST001: Carlos García López
+   - EST002: Ana Martínez Rodríguez
+   - EST003: Pedro Fernández Silva
+   - EST004: María López Díaz
+   - EST005: Juan Ramírez Cruz
+   - EST006: Sandra Torres Gómez
+   - EST007: Roberto Sánchez Ruiz
+   - EST008: Catalina Morales Vega
+
+====================================
+UBICACIÓN DE LA BASE DE DATOS:
+/home/anglortiz/Descargas/proyasist--main/asistencia.db
+
+Notas:
+- La BD es un archivo local (SQLite)
+- No requiere servidor externo
+- Los datos se almacenan en asistencia.db
+- Es embebido dentro del proyecto
+====================================

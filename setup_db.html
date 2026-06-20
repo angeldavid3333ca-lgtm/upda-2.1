@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicializar Base de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: left;
+            line-height: 1.8;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #764ba2;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ Inicializador de Base de Datos SQLite</h1>
+        
+        <div class="info">
+            <strong>Sistema de Asistencia Escolar</strong><br>
+            Base de datos embebida con SQLite
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Advertencia:</strong> Si ya has inicializado la base de datos, no es necesario volver a ejecutar este paso. Esto solo creará las tablas si no existen.
+        </div>
+
+        <a href="db_init.php" class="button">🚀 Inicializar Base de Datos</a>
+
+        <div style="margin-top: 30px;">
+            <h3>📋 Información</h3>
+            <div class="info">
+                <strong>✅ Ventajas de SQLite:</strong><br>
+                • No requiere servidor externo<br>
+                • Base de datos embebida en el archivo <code>asistencia.db</code><br>
+                • Ideal para desarrollo local<br>
+                • Fácil de respaldar y transportar<br>
+                • Compatible con PHP PDO<br>
+                <br>
+                <strong>📁 Ubicación de la BD:</strong><br>
+                <code>asistencia.db</code> en la raíz del proyecto
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="index.html" class="button">← Volver al Portal</a>
+        </div>
+    </div>
+</body>
+</html>
